@@ -1,1 +1,37 @@
-Hihi
+<!-- <!DOCTYPE html>
+<html>
+
+
+
+
+
+</html> -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>File Upload Example</title>
+</head>
+
+<body>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="file_input">Upload a DOCX or PDF file:</label>
+        <input type="file" id="file_input" name="file_input" accept=".docx, .pdf">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+<head>
+    <title>Text Input Example</title>
+</head>
+
+<body>
+    <form action="/text_input" method="post">
+        <label for="user_input">Enter text:</label>
+        <input type="text" id="user_input" name="user_input">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>
