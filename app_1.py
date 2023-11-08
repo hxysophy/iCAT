@@ -1,14 +1,14 @@
-from flask import Flask, render_template, request
+from flask import Flask, request
 import os
 import openai
 import docx
 import PyPDF2
-from collections import namedtuple
+
 
 app = Flask(__name__)
 
+
 openai.api_key = os.getenv("OPENAI_API_KEY")
-CPARTY, ORG = None, None
 
 
 def gpt_backend(background_info):
@@ -16,10 +16,10 @@ def gpt_backend(background_info):
 Given the context, the given counterparty and our organization, and three aspects that need to be addressed, please summarize the 1) position, 2) reasoning, and 3) motive and values for both parties, in the format of bullet points for each aspect. 
 
 Context:
-{background_info.content}
+{background_info}
 
-Counterparty: {background_info.counterparty}
-Our organization: {background_info.organization}
+Counterparty: Camp authorities
+Our organization: FWB
 """
 
     completion = openai.ChatCompletion.create(
@@ -41,24 +41,12 @@ Our organization: {background_info.organization}
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return open("index.html").read()
 
 
-@app.route("/next_page", methods=["POST"])
-def next_page():
-    counterparty = request.form["counterparty"]
-    organization = request.form["organization"]
-    CPARTY = counterparty
-    ORG = organization
-    return render_template(
-        "next_page.html", counterparty=counterparty, organization=organization
-    )
-
-
-@app.route("/process_data", methods=["POST"])
-def process_data():
-    uploaded_file = request.files["fileUpload"]
-    bg_info = namedtuple("bg_info", ["counterparty", "organization", "content"])
+@app.route("/upload", methods=["POST"])
+def process1():
+    uploaded_file = request.files["file_input"]
 
     if uploaded_file.filename != "":
         if uploaded_file.filename.endswith(".docx"):
@@ -72,15 +60,15 @@ def process_data():
         else:
             return "Invalid file type. Please upload a DOCX or PDF file."
         msg = "".join(content)
-        bi = bg_info(
-            counterparty=CPARTY,
-            organization=ORG,
-            content=msg,
-        )
-        res = gpt_backend(bi)
-        return render_template("result_page.html", result=res)
+        return gpt_backend(msg)
     else:
         return "No file selected."
+
+
+@app.route("/text_input", methods=["POST"])
+def process2():
+    user_input = request.form["user_input"]
+    return gpt_backend(user_input)
 
 
 if __name__ == "__main__":

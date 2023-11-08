@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Page</title>
+</head>
+
+<body>
+    <h2>Counterparty: {{ counterparty }}</h2>
+    <h2>Our Organization: {{ organization }}</h2>
+
+    <form action="/process_data" method="post" enctype="multipart/form-data">
+        <label for="textEntry">Text Entry:</label>
+        <input type="text" id="textEntry" name="textEntry" value="{{ text_entry }}"><br><br>
+
+        <label for="fileUpload">Upload a DOCX/PDF:</label>
+        <input type="file" id="fileUpload" name="fileUpload"><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <button onclick="goBack()">Back</button>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+
+</html>
