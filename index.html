@@ -1,1 +1,157 @@
-Hihi
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iCAT Webpage</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="page-div">
+        <div id="logo-container">
+            <img src="img/logo.png" alt="iCAT Logo" class="logo">
+        </div>
+        <div id="title-container">
+            <div id="title-button-group">
+                <div id="title-div">
+                    <img src="img/iCAT_text.png" alt="iCAT" class="title">
+                </div>
+                <div id="subtitle-div">
+                    <img src="img/iCAT_description.png" alt="iCat description" class="subtitle">
+                </div>
+                <div id="button-div">
+                    <button class="start-button" id="scrollButton">Start
+                        Now</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- <script>
+        function startFunction() {
+            // Add your desired JavaScript functionality for the "Start Now" button here.
+            alert("Starting iCAT...");
+        }
+    </script> -->
+    <div class="page-div" id="response-box">
+        <div id="white-box">
+            <div class="all-circles">
+                <div class="circle-container" id="step1-circle-container">
+                    <a>
+                        <div class="selected-circle" id="step1-circle">
+                            1
+                        </div>
+                        <div class="selected-circle-text" id="step1-text">
+                            Basics
+                        </div>
+                    </a>
+                </div>
+                <div class="circle-container" id="step2-circle-container">
+                    <a>
+                        <div class="circle" id="step2-circle">
+                            2
+                        </div>
+                        <div class="unselected-circle-text" id="step2-text">
+                            Background
+                        </div>
+                    </a>
+                </div>
+                <div class="circle-container" id="step3-circle-container">
+                    <a>
+                        <div class="circle" id="step3-circle">
+                            3
+                        </div>
+                        <div class="unselected-circle-text" id="step3-text">
+                            Results
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="main-content">
+
+                <div class="subpage" id="step1-page">
+                    <div class="basics-entry" id="self-org">
+                        <label for="self-org-entry" class="entry-label" id="self-org-label">Self
+                            Organization:</label><br><br>
+
+                        <input type="text" class="entry-input" id="self-org-entry" name="self-org-entry">
+                    </div>
+
+                    <div class="basics-entry" id="counter-org">
+                        <label for="counter-entry" class="entry-label" id="counter-label">Counterpart:</label><br><br>
+
+                        <input type="text" class="entry-input" id="counter-entry" name="counter-entry">
+                    </div>
+
+                    <!-- <div class="select-entry-type">
+                    <label for="counter-entry" class="entry-label" id="counter-label">Select your preferred way of entering
+                        background information:</label><br><br>
+                </div> -->
+                    <div class="entry-method">
+                        <p>Select your preferred way of entering background information:</p>
+                        <div class="entry-option" onclick="toggleSelection(this)" id="file-upload-option">
+                            <div class="circle">
+                                <div class="inner-circle"></div>
+                            </div>
+                            <p class="option-text">File Upload</p>
+                        </div>
+                        <div class="entry-option" onclick="toggleSelection(this)" id="text-entry-option">
+                            <div class="circle">
+                                <div class="inner-circle"></div>
+                            </div>
+                            <p class="option-text">Text Entry</p>
+                        </div>
+                    </div>
+                    <div id="next-button-div">
+                        <button class="next-button" id="nextButton-step1">Next</button>
+                    </div>
+                </div>
+
+                <div class="subpage" id="step2-page-file" style="display:none">
+                    <div id="fileUploadContainer" class="drop-zone">
+                        <input type="file" id="fileInput" name="fileInput" class="input-file" multiple="multiple">
+                        <p>Drag & drop files here or click to browse.</p>
+                    </div>
+
+                    <!-- Create and append the progress bar container -->
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                    <div id="buttons-div">
+                        <button class="back-button" id="backButton-step2-file">Back</button>
+                        <button class="next-button" id="nextButton-step2-file">Next</button>
+                    </div>
+                </div>
+
+                <div class="subpage" id="step2-page-text" style="display:none">
+                    <div class="background-entry">
+                        <label for="bg-entry" class="bg-entry" id="bg-entry-label">Enter background
+                            information:</label><br>
+
+                        <!-- <input type="text" class="background-entry-input" id="bg-entry" name="bg-entry"> -->
+                        <textarea name="textarea" class="background-entry-input" id="bg-entry"></textarea>
+                    </div>
+                    <div id="buttons-div">
+                        <button class="back-button" id="backButton-step2-text">Back</button>
+                        <button class="next-button" id="nextButton-step2-text">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
