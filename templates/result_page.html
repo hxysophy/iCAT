@@ -8,6 +8,15 @@
 </head>
 
 <body>
-    {{result}}
-    <h2>hello</h2>
+    <div id="jsonDiv"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var json_data = '{{ json_data|tojson|safe }}';
+            json_data = json_data.slice(1, -1);
+            const result = JSON.parse(json_data);
+            var jsonDiv = document.getElementById('jsonDiv');
+            jsonDiv.textContent = JSON.stringify(result.FWB, null, 4);
+        });
+    </script>
 </body>

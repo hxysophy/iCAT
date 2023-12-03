@@ -1,0 +1,49 @@
+{
+    "Camp Authorities": {
+        "Position": {
+            "-1": "The camp authorities want FWB to hire local guards for food ration distribution.",
+            "-2": "They require the guards to be compensated similarly to other day laborers.",
+            "-3": "They insist on food rations as compensation for the guards, citing food insecurity among their families.",
+            "-4": "They do not permit anyone else to work on behalf of FWB within the camp."
+        },
+        "Tactical Reasoning": {
+            "-1": "By requesting FWB to hire local guards, the camp authorities aim to involve the local community and provide employment opportunities.",
+            "-2": "They believe that compensating the guards similarly to other day laborers is fair and will motivate them to perform their duties effectively.",
+            "-3": "The demand for food rations as compensation is based on the belief that it will directly benefit the guards' families, who are also facing food insecurity.",
+            "-4": "By not allowing anyone else to work on behalf of FWB within the camp, the camp authorities want to maintain control and oversight over the distribution process."
+        },
+        "Values & Motives": {
+            "-1": "The camp authorities likely value the involvement and empowerment of the local community.",
+            "-2": "Their motive for requesting food rations as compensation is driven by the desire to alleviate food insecurity among the guards' families.",
+            "-3": "Identity and cultural norms could play a role in the camp authorities' position, as they seek to maintain control and ensure the security of the camp."
+        }
+    },
+    "FWB": {
+        "Position": {
+            "-1": "FWB wants to secure its presence and establish the terms of operation within the refugee camp.",
+            "-2": "The organization aims to ensure optimal food distribution results while minimizing any adverse impact on FWB and the refugee population.",
+            "-3": "FWB's offer of service includes providing emergency food rations to the recently arrived refugee families."
+        },
+        "Tactical Reasoning": {
+            "-1": "FWB intends to negotiate with the camp authorities to find a solution that ensures the safety and well-being of the refugees while upholding FWB's core principles.",
+            "-2": "The organization will seek to establish clear guidelines and protocols for the distribution process to minimize the risk of exploitation or diversion of food aid."
+        },
+        "Values & Motives": {
+            "-1": "FWB's inner principles, motives, and values include neutrality, impartiality, and independence.",
+            "-2": "The organization aims to provide emergency food aid swiftly and impartially to the refugee population while maintaining its core principles."
+        }
+    },
+    "convergent and divergent elements": {
+        "Position": {
+            "-1": "Both parties are concerned about the well-being and food security of the refugee population.",
+            "-2": "Both parties want a successful food distribution process within the camp."
+        },
+        "Tactical Reasoning": {
+            "-1": "The camp authorities prioritize involving the local community and addressing food insecurity among the guards' families, while FWB emphasizes neutrality and impartiality in the distribution process."
+        },
+        "Motives & Values": {
+            "-1": "The camp authorities value control, empowerment, and security within the camp, while FWB prioritizes the well-being of the refugee population and upholding its core principles.",
+            "-2": "Positions:\nThe camp authorities want FWB to hire local guards, while FWB may have concerns about potential exploitation.\nThe camp authorities insist on food rations as compensation, but FWB has concerns about the risk of diversion and resale."
+        }
+    }
+}
