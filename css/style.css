@@ -425,3 +425,115 @@ textarea:focus {
     font-size: 14px;
     text-align: left;
 }
+
+div.img-container {
+    display: inline-block;
+}
+
+p.img-text {
+    text-align: center;
+    color: #41575E;
+}
+
+.iceberg-clickables {
+    margin: 0 auto;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+#step3-instruction {
+    padding-top: 30px;
+    text-align: center;
+}
+
+.image-group {
+    text-align: center;
+    /* Center-align text */
+}
+
+.image-group img {
+    display: block;
+    /* Make sure the image is a block element for centering */
+    margin: 0 auto;
+    margin-top: 40px;
+    /* Horizontally center the image */
+}
+
+.image-group .result-text {
+    margin: 0;
+    font-size: 12px;
+    color: #222E32;
+    /* Remove any default margin */
+    margin-top: 10px;
+}
+
+.iceberg {
+    display: flex;
+    align-items: center;
+}
+
+.step3-column-left {
+    align-items: center;
+    width: 45%;
+    height: 100%;
+}
+
+.step3-column-right {
+    align-items: center;
+    width: 55%;
+    height: 100%;
+}
+
+.iceberg-text {
+    display: flex;
+    font-size: 14px;
+    color: #222E32;
+}
+
+#step3-results-title {
+    text-align: center;
+}
+
+.clickable:hover {
+    cursor: pointer;
+    /* Change to a pointer cursor on hover */
+}
+
+.spinning {
+    cursor: not-allowed;
+    /* Optional: Change cursor to not-allowed when spinning */
+    pointer-events: none;
+    /* Disable pointer events when spinning */
+}
+
+.spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px dashed white;
+    /* Adjust the dashed circle style as needed */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    /* Add spinning animation */
+    visibility: hidden;
+}
+
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Show the spinner when the button is in the spinning state */
+.next-button.spinning .spinner {
+    visibility: visible;
+}
