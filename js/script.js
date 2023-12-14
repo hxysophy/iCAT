@@ -81,7 +81,7 @@ Our organization: ${selforg}
 `;
 
     const apiURL = 'https://api.openai.com/v1/chat/completions';
-    const apiKey = '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'; // Replace with your actual API key
+    const apiKey = ''; // Replace with your actual API key
 
     const headers = {
         'Content-Type': 'application/json',
@@ -460,47 +460,32 @@ icebergCSS.addEventListener("click", function () {
     document.getElementById("step3-page-iceberg").style.display = "none";
     document.getElementById("step3-page-results-css").style.display = "block";
 
-    // const responseKeys = Object.keys(cssResponse);
-    // const positionIndex = findStringIndex(responseKeys, "position");
-    // const reasonIndex = findStringIndex(responseKeys, "reason");
-    // const motiveIndex = findStringIndex(responseKeys, "motive");
+    const responseKeys = Object.keys(cssResponse);
+    const positionIndex = findStringIndex(responseKeys, "position");
+    const reasonIndex = findStringIndex(responseKeys, "reason");
+    const motiveIndex = findStringIndex(responseKeys, "motive");
 
-    // const positionValue = icebergCSS[responseKeys[positionIndex]];
-    // const reasoningValue = icebergCSS[responseKeys[reasonIndex]];
-    // const motiveValue = icebergCSS[responseKeys[motiveIndex]];
+    const positionValue = cssResponse[responseKeys[positionIndex]];
+    const reasoningValue = cssResponse[responseKeys[reasonIndex]];
+    const motiveValue = cssResponse[responseKeys[motiveIndex]];
 
-    // if (isString(positionValue)) {
-    //     document.getElementById("position-text-css").innerText = positionValue;
-    // } else {
-    //     document.getElementById("position-text-css").innerText = formatJsonToBulletPoints(positionValue);
-    // }
-
-    // if (isString(reasoningValue)) {
-    //     document.getElementById("reasoning-text-css").innerText = reasoningValue;
-    // } else {
-    //     document.getElementById("reasoning-text-css").innerText = formatJsonToBulletPoints(reasoningValue);
-    // }
-
-    // if (isString(motiveValue)) {
-    //     document.getElementById("values-text-css").innerText = motiveValue;
-    // } else {
-    //     document.getElementById("values-text-css").innerText = formatJsonToBulletPoints(motiveValue);
-    // }
-    let printObj = function (obj) {
-        let string = '';
-
-        for (let prop in obj) {
-            if (typeof obj[prop] == 'string') {
-                string += prop + ': ' + obj[prop] + '; \n';
-            }
-            else {
-                string += prop + ': { \n' + print(obj[prop]) + '}';
-            }
-        }
-
-        return string;
+    if (isString(positionValue)) {
+        document.getElementById("position-text-css").innerText = positionValue;
+    } else {
+        document.getElementById("position-text-css").innerText = formatJsonToBulletPoints(positionValue);
     }
-    document.getElementById("step3-result-text-css").innerText = printObj(cssResponse);
+
+    if (isString(reasoningValue)) {
+        document.getElementById("reasoning-text-css").innerText = reasoningValue;
+    } else {
+        document.getElementById("reasoning-text-css").innerText = formatJsonToBulletPoints(reasoningValue);
+    }
+
+    if (isString(motiveValue)) {
+        document.getElementById("values-text-css").innerText = motiveValue;
+    } else {
+        document.getElementById("values-text-css").innerText = formatJsonToBulletPoints(motiveValue);
+    }
 });
 
 const backButtonCSSResponse = document.getElementById("backButton-step3-details-css");
