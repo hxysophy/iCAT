@@ -81,7 +81,7 @@ Our organization: ${selforg}
 `;
 
     const apiURL = 'https://api.openai.com/v1/chat/completions';
-    const apiKey = ''; // Replace with your actual API key
+    const apiKey = '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'; // Replace with your actual API key
 
     const headers = {
         'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ Our organization: ${selforg}
         messages: [
             {
                 "role": "user",
-                "content": `Please parse the following string into a two-level json string. The three outer-most keys are [${counterorg}], [${selforg}], [convergent and divergent elements] . The three inner-most keys are [Position], [Tactical Reasoning], [Values & Motives].: ${raw_content}`,
+                "content": `Please parse the following content into a two-level json string. The three outer-level keys are [${counterorg}], [${selforg}], [Convergent and Divergent Elements] . The three inner-level keys are [Position], [Tactical Reasoning], [Values & Motives]. Please strictly use the given keys. Content: ${raw_content}`,
             }
         ],
         model: 'gpt-3.5-turbo',
@@ -306,51 +306,220 @@ nextButton2.addEventListener("click", async function () {
     // Replace the button content with the spinning circle
     nextButton2.innerHTML = '<div class="spinner"></div>';
     background = document.getElementById('bg-entry').value;
-
-    try {
-        gptResponse = await generateChatGPTResponse(background, selforg, counterorg); // Call your actual async function here
-        selforgResponse = gptResponse[`${selforg}`]
-        counterorgResponse = gptResponse[`${counterorg}`]
+    while (true) {
         try {
+            gptResponse = await generateChatGPTResponse(background, selforg, counterorg); // Call your actual async function here
+            selforgResponse = gptResponse[`${selforg}`]
+            counterorgResponse = gptResponse[`${counterorg}`]
             cssResponse = gptResponse["Convergent and Divergent Elements"]
-        } catch (e) { }
-        try {
-            cssResponse = gptResponse["convergent and divergent elements"]
-        } catch (e) { }
-        console.log(gptResponse);
-        console.log(selforgResponse);
-        console.log(counterorgResponse);
-        console.log(cssResponse);
-    } catch (error) {
-        console.error(error);
-    } finally {
-        // change display blocks
-        nextButton2.classList.remove('spinning');
-        nextButton2.innerText = 'Next';
+            console.log(gptResponse);
+            console.log(selforgResponse);
+            console.log(counterorgResponse);
+            console.log(cssResponse);
+            // change display blocks
+            nextButton2.classList.remove('spinning');
+            nextButton2.innerText = 'Next';
 
-        document.getElementById("step3-circle").style.backgroundColor = "#73C1D9";
-        document.getElementById("step3-circle").style.opacity = "1";
-        document.getElementById("step3-circle").style.border = "0";
-        document.getElementById("step2-circle").style.backgroundColor = "#41575E";
-        document.getElementById("step2-circle").style.opacity = "0.3";
-        document.getElementById('step3-text').className = 'selected-circle-text';
-        document.getElementById('step2-text').className = 'unselected-circle-text';
+            document.getElementById("step3-circle").style.backgroundColor = "#73C1D9";
+            document.getElementById("step3-circle").style.opacity = "1";
+            document.getElementById("step3-circle").style.border = "0";
+            document.getElementById("step2-circle").style.backgroundColor = "#41575E";
+            document.getElementById("step2-circle").style.opacity = "0.3";
+            document.getElementById('step3-text').className = 'selected-circle-text';
+            document.getElementById('step2-text').className = 'unselected-circle-text';
 
-        document.getElementById("step2-page-text").style.display = "none";
-        document.getElementById("step2-page-file").style.display = "none";
+            document.getElementById("step2-page-text").style.display = "none";
+            document.getElementById("step2-page-file").style.display = "none";
 
-        document.getElementById("step3-page-iceberg").style.display = "block";
+            document.getElementById("step3-page-iceberg").style.display = "block";
+            break;
+        } catch (error) {
+            console.error(error);
+        }
     }
 
 });
 
+function formatJsonToBulletPoints(jsonData) {
+    let bulletPointString = "";
+    for (const key in jsonData) {
+        if (jsonData.hasOwnProperty(key)) {
+            bulletPointString += `• ${key}: ${jsonData[key]}\n`;
+        }
+    }
+    return bulletPointString;
+}
+
+function isString(obj) {
+    return typeof obj === "string";
+}
+
 const icebergSelf = document.getElementById("iceberg-self");
 const positionText = document.getElementById("position-text");
 
+function findStringIndex(stringsArray, substring) {
+    for (let i = 0; i < stringsArray.length; i++) {
+        if (stringsArray[i].toLowerCase().includes(substring)) {
+            return i; // Return the index of the first matching string
+        }
+    }
+    return -1; // Return -1 if the substring is not found in any string
+}
+
+
 icebergSelf.addEventListener("click", function () {
     document.getElementById("step3-page-iceberg").style.display = "none";
-    document.getElementById("step3-page-results").style.display = "block";
+    document.getElementById("step3-page-results-self").style.display = "block";
+    document.getElementById("step3-results-title-self").innerText = `Iceberg of Self Organization: ${selforg}`
 
-    // document.getElementById("position-text").innerText = selforgResponse[];
+    const responseKeys = Object.keys(selforgResponse);
+    const positionIndex = findStringIndex(responseKeys, "position");
+    const reasonIndex = findStringIndex(responseKeys, "reason");
+    const motiveIndex = findStringIndex(responseKeys, "motive");
+
+    const positionValue = selforgResponse[responseKeys[positionIndex]];
+    const reasoningValue = selforgResponse[responseKeys[reasonIndex]];
+    const motiveValue = selforgResponse[responseKeys[motiveIndex]];
+
+    if (isString(positionValue)) {
+        document.getElementById("position-text-self").innerText = positionValue;
+    } else {
+        document.getElementById("position-text-self").innerText = formatJsonToBulletPoints(positionValue);
+    }
+
+    if (isString(reasoningValue)) {
+        document.getElementById("reasoning-text-self").innerText = reasoningValue;
+    } else {
+        document.getElementById("reasoning-text-self").innerText = formatJsonToBulletPoints(reasoningValue);
+    }
+
+    if (isString(motiveValue)) {
+        document.getElementById("values-text-self").innerText = motiveValue;
+    } else {
+        document.getElementById("values-text-self").innerText = formatJsonToBulletPoints(motiveValue);
+    }
+});
+
+const backButtonSelfResponse = document.getElementById("backButton-step3-details-self");
+
+backButtonSelfResponse.addEventListener("click", function () {
+    // Clear the existing content
+    document.getElementById("step3-page-results-self").style.display = "none";
+    document.getElementById("step3-page-iceberg").style.display = "block";
+
+});
+
+
+const icebergCounter = document.getElementById("iceberg-counter");
+
+icebergCounter.addEventListener("click", function () {
+    document.getElementById("step3-page-iceberg").style.display = "none";
+    document.getElementById("step3-page-results-counter").style.display = "block";
+    document.getElementById("step3-results-title-counter").innerText = `Iceberg of Counter Organization: ${counterorg}`
+
+    const responseKeys = Object.keys(counterorgResponse);
+    const positionIndex = findStringIndex(responseKeys, "position");
+    const reasonIndex = findStringIndex(responseKeys, "reason");
+    const motiveIndex = findStringIndex(responseKeys, "motive");
+
+    const positionValue = counterorgResponse[responseKeys[positionIndex]];
+    const reasoningValue = counterorgResponse[responseKeys[reasonIndex]];
+    const motiveValue = counterorgResponse[responseKeys[motiveIndex]];
+
+    if (isString(positionValue)) {
+        document.getElementById("position-text-counter").innerText = positionValue;
+    } else {
+        document.getElementById("position-text-counter").innerText = formatJsonToBulletPoints(positionValue);
+    }
+
+    if (isString(reasoningValue)) {
+        document.getElementById("reasoning-text-counter").innerText = reasoningValue;
+    } else {
+        document.getElementById("reasoning-text-counter").innerText = formatJsonToBulletPoints(reasoningValue);
+    }
+
+    if (isString(motiveValue)) {
+        document.getElementById("values-text-counter").innerText = motiveValue;
+    } else {
+        document.getElementById("values-text-counter").innerText = formatJsonToBulletPoints(motiveValue);
+    }
+});
+
+const backButtonCounterResponse = document.getElementById("backButton-step3-details-counter");
+
+backButtonCounterResponse.addEventListener("click", function () {
+    // Clear the existing content
+    document.getElementById("step3-page-results-counter").style.display = "none";
+    document.getElementById("step3-page-iceberg").style.display = "block";
+
+});
+
+const icebergCSS = document.getElementById("iceberg-css");
+
+icebergCSS.addEventListener("click", function () {
+    document.getElementById("step3-page-iceberg").style.display = "none";
+    document.getElementById("step3-page-results-css").style.display = "block";
+
+    // const responseKeys = Object.keys(cssResponse);
+    // const positionIndex = findStringIndex(responseKeys, "position");
+    // const reasonIndex = findStringIndex(responseKeys, "reason");
+    // const motiveIndex = findStringIndex(responseKeys, "motive");
+
+    // const positionValue = icebergCSS[responseKeys[positionIndex]];
+    // const reasoningValue = icebergCSS[responseKeys[reasonIndex]];
+    // const motiveValue = icebergCSS[responseKeys[motiveIndex]];
+
+    // if (isString(positionValue)) {
+    //     document.getElementById("position-text-css").innerText = positionValue;
+    // } else {
+    //     document.getElementById("position-text-css").innerText = formatJsonToBulletPoints(positionValue);
+    // }
+
+    // if (isString(reasoningValue)) {
+    //     document.getElementById("reasoning-text-css").innerText = reasoningValue;
+    // } else {
+    //     document.getElementById("reasoning-text-css").innerText = formatJsonToBulletPoints(reasoningValue);
+    // }
+
+    // if (isString(motiveValue)) {
+    //     document.getElementById("values-text-css").innerText = motiveValue;
+    // } else {
+    //     document.getElementById("values-text-css").innerText = formatJsonToBulletPoints(motiveValue);
+    // }
+    let printObj = function (obj) {
+        let string = '';
+
+        for (let prop in obj) {
+            if (typeof obj[prop] == 'string') {
+                string += prop + ': ' + obj[prop] + '; \n';
+            }
+            else {
+                string += prop + ': { \n' + print(obj[prop]) + '}';
+            }
+        }
+
+        return string;
+    }
+    document.getElementById("step3-result-text-css").innerText = printObj(cssResponse);
+});
+
+const backButtonCSSResponse = document.getElementById("backButton-step3-details-css");
+
+backButtonCSSResponse.addEventListener("click", function () {
+    // Clear the existing content
+    document.getElementById("step3-page-results-css").style.display = "none";
+    document.getElementById("step3-page-iceberg").style.display = "block";
+
+});
+
+const backButtonIceberg = document.getElementById("backButton-step3");
+
+backButtonIceberg.addEventListener("click", function () {
+    // Clear the existing content
+    document.getElementById("step3-page-iceberg").style.display = "none";
+    if (selectedOption === textEntryOption) {
+        document.getElementById("step2-page-text").style.display = "block";
+        document.getElementById("bg-entry").innerText = background;
+    }
 
 });

@@ -484,15 +484,25 @@ p.img-text {
     align-items: center;
     width: 55%;
     height: 100%;
+
 }
 
 .iceberg-text {
     display: flex;
     font-size: 14px;
     color: #222E32;
+    margin-right: 20px;
 }
 
-#step3-results-title {
+#step3-results-title-self {
+    text-align: center;
+}
+
+#step3-results-title-counter {
+    text-align: center;
+}
+
+#step3-results-title-css {
     text-align: center;
 }
 
